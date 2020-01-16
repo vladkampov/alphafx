@@ -14,10 +14,12 @@
     "semi": 1,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-unescaped-entities": 0,
+    "prefer-promise-reject-errors": 0,
     "prettier/prettier": [
       "error", {
         "semi": true,
-        "singleQuote": true
+        "singleQuote": true,
+        "trailingComma": "es5"
       }
     ]
   }
