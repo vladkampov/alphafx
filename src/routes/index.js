@@ -5,6 +5,7 @@ import { Header, Footer } from '../components';
 import Teams from './Teams';
 import Team from './Team';
 import Players from './Players';
+import Player from './Player';
 
 const { Content } = Layout;
 
@@ -17,6 +18,7 @@ const AppRouter = () => (
           <Route path="/teams" component={Teams} exact />
           <Route path="/teams/:id" component={Team} exact />
           <Route path="/players" component={Players} exact />
+          <Route path="/players/:id" component={Player} exact />
           <Redirect from="*" to="/teams" />
         </Switch>
       </Content>

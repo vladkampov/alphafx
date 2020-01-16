@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
+import { Avatar, Divider, Table, Typography } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { Avatar, Table, Typography } from 'antd';
 
 const { Column } = Table;
 
 const TableGames = ({ teamId, gameStore, teamStore }) => {
+  const history = useHistory();
   useEffect(() => {
     if (!teamId) {
       teamStore.getTeams({});
@@ -13,13 +14,21 @@ const TableGames = ({ teamId, gameStore, teamStore }) => {
     gameStore.getGames({ team_id: teamId });
   }, []);
 
+  const handleTeamClick = id => history.push(`/teams/${id}`);
+
   return (
     <React.Fragment>
-      <Typography.Title level={2}>Games</Typography.Title>
+      <Typography.Title level={3}>Games</Typography.Title>
+      <Divider />
       <Table
         dataSource={gameStore.instances}
         rowKey="id"
         loading={gameStore.isLoading}
+        onRow={record => ({
+          onClick: () => {
+            handleTeamClick(record.id);
+          },
+        })}
       >
         <Column title="Date" dataIndex="date" key="date" />
         <Column
@@ -40,8 +49,16 @@ const TableGames = ({ teamId, gameStore, teamStore }) => {
             );
           }}
         />
-        <Column title="Team One Goals" dataIndex="team_one_goals" key="team_one_goals" />
-        <Column title="Team Two Goals" dataIndex="team_two_goals" key="team_two_goals" />
+        <Column
+          title="Team One Goals"
+          dataIndex="team_one_goals"
+          key="team_one_goals"
+        />
+        <Column
+          title="Team Two Goals"
+          dataIndex="team_two_goals"
+          key="team_two_goals"
+        />
       </Table>
     </React.Fragment>
   );

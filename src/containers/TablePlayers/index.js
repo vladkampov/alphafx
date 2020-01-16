@@ -14,11 +14,11 @@ const TablePlayers = ({ teamStore, playerStore, teamId }) => {
     playerStore.getPlayers({ team_id: teamId });
   }, []);
 
-  const handlePlayerClick = id => history.push(`/player/${id}`);
+  const handlePlayerClick = id => history.push(`/players/${id}`);
 
   return (
     <React.Fragment>
-      <Typography.Title level={2}>Players</Typography.Title>
+      <Typography.Title level={3}>Players</Typography.Title>
       <Table
         dataSource={playerStore.instances}
         rowKey="id"
@@ -56,11 +56,9 @@ const TablePlayers = ({ teamStore, playerStore, teamId }) => {
               }
 
               return (
-                <React.Fragment>
-                  <Link to={`/teams/${id}`}>
-                    <Avatar size="large" src={team.logo_url} /> {team.name}
-                  </Link>
-                </React.Fragment>
+                <Link to={`/teams/${id}`}>
+                  <Avatar size="large" src={team.logo_url} /> {team.name}
+                </Link>
               );
             }}
           />

@@ -11,7 +11,7 @@ const Team = ({ teamStore }) => {
 
   useEffect(() => {
     teamStore.getTeam(id, {});
-  }, [id, teamStore]);
+  }, []);
 
   if (teamStore.isLoading) {
     return (

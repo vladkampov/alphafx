@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
-import { Avatar, Table, Typography } from 'antd';
+import {Avatar, Descriptions, Divider, Table, Typography} from 'antd';
 import { ColourBlock } from '../../components';
 import { isHex } from '../../utils';
 
@@ -17,7 +17,8 @@ const TablePlayers = ({ teamStore }) => {
 
   return (
     <React.Fragment>
-      <Typography.Title level={2}>Teams</Typography.Title>
+      <Typography.Title level={3}>Teams</Typography.Title>
+      <Divider />
       <Table
         dataSource={teamStore.instances}
         rowKey="id"
