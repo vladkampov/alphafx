@@ -1,20 +1,28 @@
 import config from '../config';
 import api from '.';
 
-const CORE_END_POINT_URL = `${config('CORE_API_DOMAIN')}/teams`;
+const CORE_END_POINT_URL = `${config('CORE_API_DOMAIN')}`;
 
 export const getTeams = data =>
-  api(({ post }) => post(CORE_END_POINT_URL, { data }));
+  api(({ get }) => get(`${CORE_END_POINT_URL}/teams`, { data }));
+
 export const getTeam = (id, data) =>
-  api(({ post }) =>
-    post(CORE_END_POINT_URL, { data: { ...data, team_id: id } })
-  );
+  api(({ get }) => get(`${CORE_END_POINT_URL}/teams`, { data: { ...data, id } }));
 
 export const getPlayers = data =>
-  api(({ post }) => post(`${CORE_END_POINT_URL}/players`, { data }));
+  api(({ get }) => get(`${CORE_END_POINT_URL}/players`, { data }));
+
+export const getPlayer = (id, data) =>
+  api(({ get }) =>
+    get(`${CORE_END_POINT_URL}/players`, { data: { ...data, id } })
+  );
 
 export const getGames = data =>
-  api(({ post }) => post(`${CORE_END_POINT_URL}/games`, { data }));
+  api(({ get }) => get(`${CORE_END_POINT_URL}/games`, { data }));
+export const getGame = (id, data) =>
+  api(({ get }) =>
+    get(`${CORE_END_POINT_URL}/games`, { data: { ...data, id } })
+  );
 
 export const postGame = data =>
   api(({ post }) => post(`${CORE_END_POINT_URL}/games/new`, { data }));

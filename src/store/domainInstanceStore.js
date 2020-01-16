@@ -3,7 +3,8 @@ import { observable, computed, action } from 'mobx';
 export class DomainInstanceStore {
   @observable isLoading = false;
   @observable loadingError = false;
-  @observable instances = [];
+  @observable instancesKeys = [];
+  @observable instancesMap = {};
   @observable activeInstanceId = ''; // correspond to id of instance on details page
 
   constructor(instanceClass, getInstances, getInstance) {
@@ -18,9 +19,13 @@ export class DomainInstanceStore {
 
   @computed get activeInstance() {
     return (
-      this.instances.find(i => i.id === this.activeInstanceId) ||
+      this.instancesMap[this.activeInstanceId] ||
       new this.InstanceClass(this, {})
     );
+  }
+
+  @computed get instances() {
+    return this.instancesKeys.map(k => this.instancesMap[k]);
   }
 
   @action getInstances(body) {
@@ -28,7 +33,12 @@ export class DomainInstanceStore {
 
     return this.getInstancesCb(body)
       .then(({ data }) => {
-        this.instances = data.data.map(i => new this.InstanceClass(this, i));
+        this.instancesKeys = data.data.map(i => {
+          const instClass = new this.InstanceClass(this, i);
+          this.instancesMap[i.id] = instClass;
+
+          return instClass.id;
+        });
         this.isLoading = false;
       })
       .catch(() => {
@@ -44,11 +54,19 @@ export class DomainInstanceStore {
       this.isLoading = true;
     }
 
+    if (this.instancesMap[id]) {
+      return this.instancesMap[id];
+    }
+
     return this.getInstanceCb(id, body).then(({ data }) => {
-      const instance = new this.InstanceClass(this, data); // eslint-disable-line no-use-before-define
+      const instance = new this.InstanceClass(
+        this,
+        data.data.find(obj => obj.id === id)
+      ); // eslint-disable-line no-use-before-define
 
       if (!this.activeInstance.id) {
-        this.instances.push(instance);
+        this.instancesKeys.push(instance.id);
+        this.instancesMap[id] = instance;
       } else {
         this.activeInstance.fromJSON(data);
       }
@@ -64,7 +82,6 @@ export class DomainInstance {
 
   constructor(store, json) {
     this.store = store;
-
     if (json.id) {
       this.fromJSON(json);
     }

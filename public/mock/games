@@ -1,0 +1,12 @@
+{
+    "success": true,
+    "data": [
+        {
+            "id": "901eb39d-082c-42e8-a07c-6ba8d71cc32b",
+            "date": "2018-08-04T07:41:55.172Z",
+            "team_one_id": "b349094d-d51c-48d8-bb1d-7ca4f571ea89",
+            "team_one_goals": 2,
+            "team_two_goals": 4
+        }
+    ]
+}

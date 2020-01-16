@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Header, Footer } from '../components';
-import Home from './Home';
+import Teams from './Teams';
+import Team from './Team';
+import Players from './Players';
 
 const { Content } = Layout;
 
@@ -12,7 +14,10 @@ const AppRouter = () => (
       <Header />
       <Content style={{ padding: '0 50px' }}>
         <Switch>
-          <Route path="/" component={Home} />
+          <Route path="/teams" component={Teams} exact />
+          <Route path="/teams/:id" component={Team} exact />
+          <Route path="/players" component={Players} exact />
+          <Redirect from="*" to="/teams" />
         </Switch>
       </Content>
       <Footer />

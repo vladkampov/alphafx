@@ -1,32 +1,27 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { Avatar, Table, Typography } from 'antd';
+import { ColourBlock } from '../../components';
 import { isHex } from '../../utils';
 
 const { Column } = Table;
 
-const ColourLabel = styled.div`
-  width: 16px;
-  height: 16px;
-  background: ${props => props.colour};
-`;
-
-const Home = ({ teamStore }) => {
+const TablePlayers = ({ teamStore }) => {
   const history = useHistory();
   useEffect(() => {
     teamStore.getTeams({});
-  }, [teamStore]);
+  }, []);
 
-  const handleTeamClick = id => history.push(`/team/${id}`);
+  const handleTeamClick = id => history.push(`/teams/${id}`);
 
   return (
-    <section>
+    <React.Fragment>
       <Typography.Title level={2}>Teams</Typography.Title>
       <Table
         dataSource={teamStore.instances}
         rowKey="id"
+        loading={teamStore.isLoading}
         onRow={record => ({
           onClick: () => {
             handleTeamClick(record.id);
@@ -48,15 +43,15 @@ const Home = ({ teamStore }) => {
           dataIndex="colour"
           key="colour"
           render={colour => (
-            <ColourLabel
+            <ColourBlock
               key={`colour_${colour}`}
               colour={isHex(colour) ? `#${colour}` : colour}
             />
           )}
         />
       </Table>
-    </section>
+    </React.Fragment>
   );
 };
 
-export default inject('teamStore')(observer(Home));
+export default inject('teamStore')(observer(TablePlayers));

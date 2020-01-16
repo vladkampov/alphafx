@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "data": [
+        {
+            "id": "b349094d-d51c-48d8-bb1d-7ca4f571ea89",
+            "name": "Manchester United",
+            "city": "Manchester",
+            "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/220px-Manchester_United_FC_crest.svg.png",
+            "founded": "1878",
+            "colour": "red",
+            "budget": "75000000"
+        }
+    ]
+}

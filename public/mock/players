@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "data": [
+        {
+            "id": "bd352bc3-6c09-4333-97f3-597de9af3b5a",
+            "team_id": "b349094d-d51c-48d8-bb1d-7ca4f571ea89",
+            "name": "Buddy Alphonse",
+            "age": 29,
+            "nationality": "Ireland",
+            "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Flag_of_Ireland.svg/125px-Flag_of_Ireland.svg.png",
+            "position": "GK",
+            "history": [
+                {
+                    "team_id": "3097fe71-57da-4c84-8efd-33bb9bae9d21",
+                    "apps": 9,
+                    "goals": 15
+                }
+            ],
+            "value": "923332"
+        }
+    ]
+}
