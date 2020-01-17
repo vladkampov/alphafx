@@ -1810,11 +1810,6 @@ accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-accounting@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/accounting/-/accounting-0.4.1.tgz#87dd4103eff7f4460f1e186f5c677ed6cf566883"
-  integrity sha1-h91BA+/39EYPHhhvXGd+1s9WaIM=
-
 acorn-globals@^4.1.0, acorn-globals@^4.3.0:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/acorn-globals/-/acorn-globals-4.3.4.tgz#9fa1926addc11c97308c4e66d7add0d40c3272e7"
@@ -3586,15 +3581,6 @@ csstype@^2.2.0:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.8.tgz#0fb6fc2417ffd2816a418c9336da74d7f07db431"
   integrity sha512-msVS9qTuMT5zwAGCVm4mxfrZ18BNc6Csd0oJAtiFMZ1FAx1CCvy2+5MDmYoix63LM/6NDbNtodCiGYGmFgO0dA==
 
-currency-formatter@^1.5.5:
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/currency-formatter/-/currency-formatter-1.5.5.tgz#907790bb0b7f129c4a64d2924e0d7fa36db0cf52"
-  integrity sha512-PEsZ9fK2AwPBYgzWTtqpSckam7hFDkT8ZKFAOrsooR0XbydZEKuFioUzcc3DoT2mCDkscjf1XdT6Qq53ababZQ==
-  dependencies:
-    accounting "^0.4.1"
-    locale-currency "0.0.2"
-    object-assign "^4.1.1"
-
 customize-cra@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-0.9.1.tgz#76b42c4f537c16329eccc09cfefd804d04c81550"
@@ -3635,11 +3621,6 @@ data-urls@^1.0.0, data-urls@^1.1.0:
     abab "^2.0.0"
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
-
-date-fns@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.1.0.tgz#0d7e806c3cefe14a943532dbf968995ccfd46bd9"
-  integrity sha512-eKeLk3sLCnxB/0PN4t1+zqDtSs4jb4mXRSTZ2okmx/myfWyDqeO4r5nnmA5LClJiCwpuTMeK2v5UQPuE4uMaxA==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -6728,11 +6709,6 @@ loader-utils@1.2.3, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.
     emojis-list "^2.0.0"
     json5 "^1.0.1"
 
-locale-currency@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/locale-currency/-/locale-currency-0.0.2.tgz#e2c90607563ce47a59f9559e45a70e24e4db4b6d"
-  integrity sha1-4skGB1Y85HpZ+VWeRacOJOTbS20=
-
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
@@ -9651,13 +9627,6 @@ react@^16.12.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
 
-reactive-mobx-form@^0.14.1:
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/reactive-mobx-form/-/reactive-mobx-form-0.14.1.tgz#3f82ceed351f61417da3efc20f70891fa2577d59"
-  integrity sha512-eECJFE40ak3YXu1AFotgAYWc0mm39nsYe93njkNqjVZ/1hYESiC/uF5uMhjhoPtmyo1zpcXS3U/thVHnn+NAWQ==
-  dependencies:
-    validatorjs "^3.15.1"
-
 read-pkg-up@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-2.0.0.tgz#6b72a8048984e0c41e79510fd5e9fa99b3b549be"
@@ -11363,13 +11332,6 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
-
-validatorjs@^3.15.1:
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/validatorjs/-/validatorjs-3.18.1.tgz#5ded9858d2bf9032b517c2e6f9dfc286525cd17a"
-  integrity sha512-ZyHd0lJKNft3nUe+tYtTui2B5GwdKexWB55qNljccJouW/eo06YhYpCYjPlN/F5n/o0eS1uvb1Janh6eRl+TBQ==
-  dependencies:
-    date-fns "2.1.0"
 
 value-equal@^1.0.1:
   version "1.0.1"
