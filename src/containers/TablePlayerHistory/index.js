@@ -1,17 +1,15 @@
 import React from 'react';
 import { Avatar, Divider, Table, Typography } from 'antd';
+import {Link} from "react-router-dom";
 
 const { Column } = Table;
 
-const TablePlayerHistory = ({ teamsMap, history = []}) => {
+const TablePlayerHistory = ({ teamsMap, history = [] }) => {
   return (
     <React.Fragment>
       <Typography.Title level={3}>History</Typography.Title>
       <Divider />
-      <Table
-        dataSource={history}
-        rowKey="team_id"
-      >
+      <Table dataSource={history} rowKey="team_id">
         <Column
           title="Team"
           dataIndex="team_id"
@@ -24,22 +22,14 @@ const TablePlayerHistory = ({ teamsMap, history = []}) => {
             }
 
             return (
-              <React.Fragment>
+              <Link to={`/teams/${team.id}`}>
                 <Avatar size="large" src={team.logo_url} /> {team.name}
-              </React.Fragment>
+              </Link>
             );
           }}
         />
-        <Column
-          title="Apps"
-          dataIndex="apps"
-          key="apps"
-        />
-        <Column
-          title="Goals"
-          dataIndex="goals"
-          key="goals"
-        />
+        <Column title="Apps" dataIndex="apps" key="apps" />
+        <Column title="Goals" dataIndex="goals" key="goals" />
       </Table>
     </React.Fragment>
   );

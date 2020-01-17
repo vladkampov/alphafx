@@ -1,40 +1,77 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Avatar, Divider, Table, Typography } from 'antd';
-import { useHistory } from 'react-router-dom';
+import moment from 'moment';
+import { Button, Divider, Table, Typography } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+import { Thumbnail } from '../../components';
 
 const { Column } = Table;
 
 const TableGames = ({ teamId, gameStore, teamStore }) => {
   const history = useHistory();
+
   useEffect(() => {
     if (!teamId) {
       teamStore.getTeams({});
     }
-    gameStore.getGames({ team_id: teamId });
+    gameStore.getGames({ team_one_id: teamId });
   }, []);
-
-  const handleTeamClick = id => history.push(`/teams/${id}`);
 
   return (
     <React.Fragment>
-      <Typography.Title level={3}>Games</Typography.Title>
+      <Typography.Title level={3}>
+        Games{' '}
+        <Button
+          size="small"
+          type="primary"
+          onClick={() => history.push('/games/new')}
+        >
+          Add new game
+        </Button>
+      </Typography.Title>
       <Divider />
       <Table
         dataSource={gameStore.instances}
         rowKey="id"
         loading={gameStore.isLoading}
-        onRow={record => ({
-          onClick: () => {
-            handleTeamClick(record.id);
-          },
-        })}
       >
-        <Column title="Date" dataIndex="date" key="date" />
         <Column
-          title="Team"
-          dataIndex="team_one_id"
-          key="team_one_id"
+          title="Date"
+          dataIndex="date"
+          key="date"
+          render={date => moment(date).format('DD/MM/YY')}
+        />
+        {!teamId && (
+          <Column
+            title="First Team"
+            dataIndex="team_one_id"
+            key="team_one_id"
+            sorter={(a, b) => a.team_one_id.localeCompare(b.team_one_id)}
+            render={id => {
+              const team = teamStore.instancesMap[id];
+
+              if (!team) {
+                return 'No team';
+              }
+
+              return (
+                <Link to={`/teams/${team.id}`}>
+                  <Thumbnail src={team.logo_url} alt={team.name} /> {team.name}
+                </Link>
+              );
+            }}
+          />
+        )}
+        <Column
+          title="Team One Goals"
+          dataIndex="team_one_goals"
+          key="team_one_goals"
+        />
+        <Column
+          title="Second Team"
+          dataIndex="team_two_id"
+          key="team_two_id"
+          sorter={(a, b) => a.team_two_id.localeCompare(b.team_two_id)}
           render={id => {
             const team = teamStore.instancesMap[id];
 
@@ -43,16 +80,11 @@ const TableGames = ({ teamId, gameStore, teamStore }) => {
             }
 
             return (
-              <React.Fragment>
-                <Avatar size="large" src={team.logo_url} /> {team.name}
-              </React.Fragment>
+              <Link to={`/teams/${team.id}`}>
+                <Thumbnail src={team.logo_url} alt={team.name} /> {team.name}
+              </Link>
             );
           }}
-        />
-        <Column
-          title="Team One Goals"
-          dataIndex="team_one_goals"
-          key="team_one_goals"
         />
         <Column
           title="Team Two Goals"

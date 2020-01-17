@@ -11,8 +11,14 @@ export const makeRequest = (method, url, options = {}) => {
   const { data, params } = options;
   const headers = { ...axiosInstance.defaults.headers, ...options.headers };
 
-  return axiosInstance({ method, url, data, params, headers }).then(response =>
-    pick(response, ['data', 'status'])
+  return axiosInstance({ method, url, data, params, headers }).then(
+    response => {
+      if (!response.data.success) {
+        throw new Error(response.data.error);
+      }
+
+      return pick(response, ['data', 'status']);
+    }
   );
 };
 

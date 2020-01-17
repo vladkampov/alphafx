@@ -6,9 +6,7 @@ export class TeamStore extends DomainInstanceStore {
     super(Team, getTeams, getTeam);
   }
 
-  getTeams(body) {
-    this.getInstances(body);
-  }
+  getTeams = body => this.getInstances(body);
 
   getTeam = (id, body) => this.getInstance(id, body);
 }

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { useHistory, Link } from 'react-router-dom';
-import { Avatar, Table, Typography } from 'antd';
+import { Table, Typography } from 'antd';
+import { Thumbnail } from '../../components';
+import { fmtCurrency } from '../../utils';
 
 const { Column } = Table;
 
@@ -29,25 +31,20 @@ const TablePlayers = ({ teamStore, playerStore, teamId }) => {
           },
         })}
       >
-        <Column title="Name" dataIndex="name" key="name" />
-        <Column title="Age" dataIndex="age" key="age" />
         <Column
-          title="Nationality"
-          dataIndex="nationality"
-          key="nationality"
-          render={(n, record) => (
-            <React.Fragment>
-              <Avatar size="small" shape="square" stc={record.flag_url} /> {n}
-            </React.Fragment>
+          title="Name"
+          dataIndex="name"
+          key="name"
+          render={(name, record) => (
+            <Link to={`/players/${record.id}`}>{name}</Link>
           )}
         />
-        <Column title="Position" dataIndex="position" key="position" />
-        <Column title="Value" dataIndex="value" key="value" />
         {!teamId && (
           <Column
             title="Team"
             dataIndex="team_id"
             key="team_id"
+            sorter={(a, b) => a.name.localeCompare(b.name)}
             render={id => {
               const team = teamStore.instancesMap[id];
 
@@ -57,12 +54,43 @@ const TablePlayers = ({ teamStore, playerStore, teamId }) => {
 
               return (
                 <Link to={`/teams/${id}`}>
-                  <Avatar size="large" src={team.logo_url} /> {team.name}
+                  <Thumbnail size="large" src={team.logo_url} /> {team.name}
                 </Link>
               );
             }}
           />
         )}
+        <Column
+          title="Age"
+          sorter={(a, b) => +a.age - +b.age}
+          dataIndex="age"
+          key="age"
+        />
+        <Column
+          title="Nationality"
+          dataIndex="nationality"
+          key="nationality"
+          sorter={(a, b) => a.nationality.localeCompare(b.nationality)}
+          render={(n, record) => (
+            <React.Fragment>
+              <Thumbnail size="small" shape="square" src={record.flag_url} />{' '}
+              {n}
+            </React.Fragment>
+          )}
+        />
+        <Column
+          title="Position"
+          sorter={(a, b) => a.position.localeCompare(b.position)}
+          dataIndex="position"
+          key="position"
+        />
+        <Column
+          title="Value"
+          dataIndex="value"
+          key="value"
+          sorter={(a, b) => +a.value - +b.value}
+          render={money => fmtCurrency(money)}
+        />
       </Table>
     </React.Fragment>
   );

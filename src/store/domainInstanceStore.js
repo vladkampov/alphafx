@@ -55,14 +55,17 @@ export class DomainInstanceStore {
     }
 
     if (this.instancesMap[id]) {
-      return this.instancesMap[id];
+      return new Promise(resolve => resolve(this.instancesMap[id]));
     }
 
     return this.getInstanceCb(id, body).then(({ data }) => {
+      if (!data.success) {
+        throw new Error();
+      }
       const instance = new this.InstanceClass(
         this,
-        data.data.find(obj => obj.id === id)
-      ); // eslint-disable-line no-use-before-define
+        data.data.find(obj => obj.id === id) || {}
+      );
 
       if (!this.activeInstance.id) {
         this.instancesKeys.push(instance.id);

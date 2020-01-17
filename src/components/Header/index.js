@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menu, Layout } from 'antd';
-import { Link } from 'react-router-dom';
+import { Menu, Layout, Button, Typography } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledHeader = styled(Layout.Header)`
@@ -8,20 +8,24 @@ const StyledHeader = styled(Layout.Header)`
 `;
 
 const AppHeader = () => {
+  const { location, push } = useHistory();
+
   return (
     <StyledHeader>
-      <div className="logo" />
       <Menu
+        selectedKeys={location.pathname.split('/')}
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={['Teams']}
         style={{ lineHeight: '64px' }}
       >
-        <Menu.Item key="Teams">
+        <Menu.Item key="teams">
           <Link to="/teams">Teams</Link>
         </Menu.Item>
-        <Menu.Item key="Players">
+        <Menu.Item key="players">
           <Link to="/players">Players</Link>
+        </Menu.Item>
+        <Menu.Item key="games">
+          <Link to="/games">Games</Link>
         </Menu.Item>
       </Menu>
     </StyledHeader>

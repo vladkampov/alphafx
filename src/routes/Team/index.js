@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Avatar, Icon, Typography, Descriptions, Divider } from 'antd';
 import { ColourBlock } from '../../components';
 import { TableGames, TablePlayers } from '../../containers';
@@ -8,9 +8,14 @@ import { isHex } from '../../utils';
 
 const Team = ({ teamStore }) => {
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
-    teamStore.getTeam(id, {});
+    teamStore.getTeam(id, {}).catch(err => {
+      // eslint-disable-next-line
+      console.error(err);
+      history.push('/teams');
+    });
   }, []);
 
   if (teamStore.isLoading) {
