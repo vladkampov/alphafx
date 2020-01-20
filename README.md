@@ -4,6 +4,7 @@
 
 ## `yarn install && yarn start`
 
+Please be sure you've defined API url with `export REACT_APP_CORE_API_DOMAIN=https://set-proper-url/api`
 Note to pre-install yarn on your machine
 
 ## With Docker
